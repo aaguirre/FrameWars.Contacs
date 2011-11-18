@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Contact Info</h1>
+<div id="list3">
+    <img src="/get-file/?id={{contact.photo}}" />
+    <ul>
+       <li>Firstname: {{contact.firstname }}</li>
+       <li>Lastname: {{contact.lastname }}</li>
+       <li>Email: {{contact.email }}</li>
+{% for k,v in contact.items() %}
+    {% if k not in ['photo','lastname','firstname','email'] %}
+        <li>{{k|capitalize}} : {{v}}</li>
+    {%endif%}
+{%endfor%}
+     </ul>
+</div>
+</body>
+</html>
+
+{% endblock %}

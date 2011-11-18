@@ -1,0 +1,5 @@
+pyramid
+pyramid_debugtoolbar
+pymongo
+wtforms
+pyramid_jinja2

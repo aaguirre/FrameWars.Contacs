@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script>
+    $(function() {
+        $('#add-field').click(function() {
+            var fieldName = prompt('Enter a new Field Name', '');
+            if (fieldName != "")
+            {
+                $('#additional-fields').append('<p><label>' + fieldName + ' : </label>' +
+                        '<input type="text" name="' + fieldName + '" id="' + fieldName + '" value="" class="new-field"></p>');
+            }
+        });
+    });
+</script>
+        
+<h1>Add new contact:</h1>
+<form name="contact-form" accept-charset="utf-8" enctype="multipart/form-data" method="post" action="">
+
+    <p>
+            {{form.firstname.label}}  :  {{form.firstname()}}
+    </p>
+    <p>
+            {{form.lastname.label}}  :  {{form.lastname()}}
+    </p>
+    <p>
+            {{form.email.label}}  :  {{form.email()}}
+    </p>
+    <p>
+            {{form.photo.label}} :{{form.photo()}}
+    </p>
+    <!-- Show dynamic fields -->
+    {% for name,element in form._fields.items() %}
+        {% if name not in ['photo','lastname','firstname','email'] %}
+        <p>
+            <label>{{name|capitalize}}</label>:  {{element}}
+        </p>
+        {%endif%}
+          
+    {% endfor %}
+
+    <div id="additional-fields" class='new-field'></div>
+
+    {% if form.errors %}
+    <ul class="errors">
+        {% for k,v in form.errors.items() %}
+        <li>{{k|capitalize}}</li>
+        <ul>
+            {% for e in v %}
+            <li>{{e}}</li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <input type="submit" name="submit" id="submit" value="Submit">
+    <hr/>
+    <p><a href="#" id="add-field">Add New Field</a></p>
+</form>
+</body>
+</html>
+{% endblock %}

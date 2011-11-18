@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Contact List</h1>
+<div id="list2">
+    <ol>
+        {% for contact in contacts %}
+           <li><div class="photo"><img src="/get-file/?id={{contact.photo}}" width="70px" /></div>{{contact.firstname}} {{contact.lastname}} / {{contact.email}} / <a href="/view-contact/{{contact._id}}">Details</a></li>
+        {% endfor %}
+    </ol>
+</div>
+{% endblock %}
